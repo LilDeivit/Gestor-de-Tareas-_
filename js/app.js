@@ -1,6 +1,6 @@
-// Estado inicial de tareas en memoria
-let tareas = [];
-let siguienteId = 1;
+// Estado inicial de tareas (cargado desde localStorage si existe)
+let tareas = JSON.parse(localStorage.getItem("tareas")) || [];
+let siguienteId = tareas.length > 0 ? Math.max(...tareas.map((t) => t.id)) + 1 : 1;
 
 // Referencias a elementos del DOM
 const formulario = document.getElementById("formulario");
@@ -8,12 +8,14 @@ const entrada = document.getElementById("entrada");
 const lista = document.getElementById("lista");
 const vacio = document.getElementById("vacio");
 const contador = document.getElementById("contador");
+const botonLimpiar = document.getElementById("limpiar");
 
 // Calcula cuantas tareas faltan por completar y actualiza el contador y el mensaje vacio
 const actualizarResumen = () => {
   const pendientes = tareas.filter((tarea) => !tarea.completada).length;
   contador.textContent = pendientes;
   vacio.hidden = tareas.length > 0;
+  botonLimpiar.hidden = !tareas.some((tarea) => tarea.completada);
 };
 
 // Crea el elemento <li> de una tarea manteniendo la estructura que espera estilos.css
@@ -61,6 +63,7 @@ const renderizarTareas = () => {
     lista.appendChild(elementoTarea);
   });
 
+  localStorage.setItem("tareas", JSON.stringify(tareas));
   actualizarResumen();
 };
 
@@ -95,6 +98,12 @@ const eliminarTarea = (idTarea) => {
   renderizarTareas();
 };
 
+// Elimina todas las tareas marcadas como completadas
+const limpiarCompletadas = () => {
+  tareas = tareas.filter((tarea) => !tarea.completada);
+  renderizarTareas();
+};
+
 // Evento de envio del formulario
 formulario.addEventListener("submit", (evento) => {
   evento.preventDefault();
@@ -102,6 +111,8 @@ formulario.addEventListener("submit", (evento) => {
   entrada.value = "";
   entrada.focus();
 });
+
+botonLimpiar.addEventListener("click", limpiarCompletadas);
 
 // Renderizado inicial al cargar la pagina
 renderizarTareas();

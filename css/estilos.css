@@ -136,3 +136,22 @@ button:focus-visible {
   overflow: hidden;
   clip: rect(0 0 0 0);
 }
+
+.limpiar {
+  display: block;
+  margin: 1rem auto 0;
+  background: transparent;
+  color: var(--gris);
+  border: 1.5px solid var(--borde);
+  font-size: 0.85rem;
+  padding: 0.45rem 0.9rem;
+}
+
+.limpiar:hover {
+  color: var(--peligro);
+  border-color: var(--peligro);
+}
+
+.limpiar[hidden] {
+  display: none;
+}
