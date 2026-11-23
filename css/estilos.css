@@ -1,0 +1,138 @@
+:root {
+  --papel: #f3f6fa;
+  --tinta: #1f2a44;
+  --acento: #0f8b8d;
+  --acento-oscuro: #0b6b6d;
+  --gris: #8a94a6;
+  --borde: #d5dce6;
+  --peligro: #c0392b;
+  --blanco: #ffffff;
+}
+
+* { 
+  box-sizing: border-box; 
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--papel);
+  color: var(--tinta);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  display: flex;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.tablero {
+  width: 100%;
+  max-width: 560px;
+}
+
+h1 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 2.4rem;
+  margin: 0 0 0.25rem;
+}
+
+.pendientes {
+  margin: 0 0 1.5rem;
+  color: var(--gris);
+}
+
+.pendientes strong {
+  color: var(--acento-oscuro);
+  font-size: 1.2rem;
+}
+
+.formulario {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.formulario input {
+  flex: 1;
+  padding: 0.7rem 0.9rem;
+  border: 1.5px solid var(--borde);
+  border-radius: 8px;
+  font-size: 1rem;
+  background: var(--blanco);
+}
+
+button {
+  cursor: pointer;
+  font-size: 0.95rem;
+  border-radius: 8px;
+  border: none;
+  padding: 0.7rem 1rem;
+}
+
+.formulario button {
+  background: var(--acento);
+  color: var(--blanco);
+  font-weight: 600;
+}
+
+.formulario button:hover { background: var(--acento-oscuro); }
+
+input:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--tinta);
+  outline-offset: 2px;
+}
+
+.lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1.5px solid var(--borde);
+}
+
+.tarea {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 0.25rem;
+  border-bottom: 1.5px solid var(--borde);
+}
+
+.tarea input[type="checkbox"] {
+  width: 1.2rem;
+  height: 1.2rem;
+  accent-color: var(--acento);
+  cursor: pointer;
+}
+
+.tarea .texto {
+  flex: 1;
+  word-break: break-word;
+}
+
+.tarea.completada .texto {
+  text-decoration: line-through;
+  color: var(--gris);
+}
+
+.tarea .eliminar {
+  background: transparent;
+  color: var(--peligro);
+  border: 1.5px solid transparent;
+  padding: 0.4rem 0.7rem;
+}
+
+.tarea .eliminar:hover { border-color: var(--peligro); }
+
+.vacio {
+  text-align: center;
+  color: var(--gris);
+  margin-top: 1.5rem;
+}
+
+.solo-lectores {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
